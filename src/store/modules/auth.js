@@ -397,6 +397,7 @@ const actions = {
     }
 
     return new Promise((resolve, reject) => {
+      commit('scope_token/' + types.SCOPE_TOKEN_CLEAR_ALL, null, {root: true})
       commit('LOGIN_REQUEST')
       authAPI.loginLocal({
         email: credentials.email,
@@ -429,6 +430,7 @@ const actions = {
 
   singleSignOn ({ dispatch, commit, state }, { router, id }) {
     return new Promise((resolve, reject) => {
+      commit('scope_token/' + types.SCOPE_TOKEN_CLEAR_ALL, null, {root: true})
       commit('LOGIN_REQUEST')
       authAPI.singleSignOn({
         uuid: id
