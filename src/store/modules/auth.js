@@ -442,7 +442,7 @@ const actions = {
           profile: {}
         }
         commit(types.AUTH_LOGIN_SUCCESS, result)
-        dispatch('profile', {res: re, router: router, returnUrl: ''});
+        dispatch('profile', {res: re, router: router, returnUrl: ''}).then(resolve, reject);
       }, (er) => {
         commit('LOGIN_FAILURE')
         if (er.status == 500) {
