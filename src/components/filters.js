@@ -285,8 +285,8 @@ function orderFilters(list, attribute, type, orderby) {
     }
 
     if (type == 'string') {
-      let strA = attributeA.toLowerCase();
-      let strB = attributeB.toLowerCase();
+      let strA = String(attributeA == null ? '' : attributeA).toLowerCase();
+      let strB = String(attributeB == null ? '' : attributeB).toLowerCase();
 
       if (orderby == 'asc') {
         // sort string ascending
