@@ -56,3 +56,19 @@ For detailed explanation on how things work, checkout the [webpack guide](http:/
   <template v-if="features.FEATURE_IN_DEVELOPMENT">
     ...
   </template>
+## Authentication configuration
+
+Build the frontend with DESKPRO_URL set to the trusted HTTPS support site, for example
+DESKPRO_URL=https://support.example.com. Return links on other origins are rejected.
+If the setting is absent, login continues to the dashboard without sending a support JWT.
+
+Deploy this frontend together with the API changes: password recovery requests and
+password changes now use POST, and new passwords travel in the request body.
+
+
+## Credentials for deployment
+
+Provide CLIENT_SECRET and EASYVISTA_AUTH_CODE through private build environment
+configuration. Set SLACK_WEBHOOK_URL and SLACK_API_TOKEN for deployment notifications.
+Embedded credential values were removed from this public repository history.
+Rotate the original service credentials before reusing the associated accounts.
