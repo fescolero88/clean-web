@@ -65,7 +65,7 @@ const actions = {
         }
 
         authAPI.refreshLoginToken(_params, (res) => {
-          commit(types.AUTH_REFRESH_TOKEN, res)
+          commit(types.AUTH_REFRESH_TOKEN, res.data)
           // console.log('refresh token', state.token)
           resolve(state.token)
         }, (err) => {
