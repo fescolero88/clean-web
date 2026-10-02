@@ -24,7 +24,7 @@ export default {
   },
 
   resetPasswordEmail (email, params, cb, errCb) {
-    http.get(API_BASE_URL + '/resetPassword/' + email, params).then(res => cb(res), err => errCb(err))
+    http.post(API_BASE_URL + '/resetPassword/' + encodeURIComponent(email), {}).then(res => cb(res), err => errCb(err))
   },
 
   resetPasswords (identification, code, params, cb, errCb) {
