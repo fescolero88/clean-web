@@ -1,4 +1,5 @@
 import _ from "lodash";
+import {isTokenExpired} from "./../../helpers/modules/token";
 import authAPI from "./../../api/auth-api";
 import * as types from "./../mutation-types";
 import user from "./../../models/User";
@@ -32,11 +33,7 @@ const getters = {
   },
 
   isExpired: (state) => {
-    let status = false;
-    if(state.token)
-      status = Date.now() > (state.token.updated_at + state.token.expires_in);
-
-    return status;
+    return !!(state.token && state.token.access_token) && isTokenExpired(state.token);
   },
 
   getProfile: (state) => {
@@ -56,16 +53,7 @@ const actions = {
 
   getLoginToken ({dispatch, commit, state}) {
     return new Promise((resolve, reject) => {
-      let updated_at = new Date().getTime() - 4000 // Set token as expired by default
-      if (state.token && state.token.updated_at) { // Get updated_at if set
-        updated_at = state.token.updated_at
-      }
-      let current_time = new Date().getTime()
-      let passed = Math.abs(updated_at - current_time) / 1000;
-      // let expires_in = state.token.expires_in
-      let expires_in = 3600
-
-      if (passed < expires_in) {
+      if (!isTokenExpired(state.token)) {
         // console.log('saved token', state.token)
         resolve(state.token)
       } else {
