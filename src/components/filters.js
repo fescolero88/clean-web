@@ -21,7 +21,7 @@ function filterByModifications(list, value) {
     });
   }
 
-  return;
+  return [];
 }
 
 function filterByModificationsd(list, value) {
@@ -30,7 +30,7 @@ function filterByModificationsd(list, value) {
             return item.modType.indexOf(value) > -1;
         });
     } else {
-        return
+        return []
     }
 }
 
