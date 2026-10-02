@@ -251,14 +251,14 @@ router.beforeEach((to, from, next) => {
 
     store.dispatch('auth/logout').then(res => {
       console.log('expire logout');
-      history.go(0);
-      next({name: 'login'})
+      return next({name: 'login'})
     })
+    return
   }
 
   if (to.name === 'login' || to.name === 'loginLocal') {
     if (authenticated) {
-        next({name: 'dashboard'})
+        return next({name: 'dashboard'})
     }
   } else {
     // if (to.meta.requiresAuth && !authenticated) {
