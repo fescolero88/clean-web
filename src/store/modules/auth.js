@@ -404,7 +404,6 @@ const actions = {
         email: credentials.email,
         password: credentials.password
       }, (res) => {
-        console.log('loginLocal', res)
         let current_time = new Date().getTime()
         const result = {
           user_id: res.data.user_id,
