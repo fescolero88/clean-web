@@ -394,6 +394,7 @@ const actions = {
       dispatch('error/addNew', {
         message: "The Password must not be empty, please, fill it properly."
       }, {root: true})
+      return Promise.reject(new Error('Password is required'))
     }
 
     return new Promise((resolve, reject) => {
