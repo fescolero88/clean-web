@@ -8,7 +8,7 @@ export default {
   },
 
   isEmptyObject (val) {
-    if (val == null || val === void (0) || val === '' || val === {}) {
+    if (val == null || val === void (0) || val === '' || (typeof val === 'object' && Object.keys(val).length === 0)) {
       return true
     } else {
       return false
