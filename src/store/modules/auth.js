@@ -63,6 +63,7 @@ const actions = {
         // console.log('saved token', state.token)
         resolve(state.token)
       } else {
+        const sessionToken = state.token
         let _params = {
           grant_type: 'refresh_token',
           client_id: process.env.CLIENT_ID,
@@ -71,6 +72,10 @@ const actions = {
         }
 
         authAPI.refreshLoginToken(_params, (res) => {
+          if (state.token !== sessionToken) {
+            reject(new Error('The session changed while refreshing'))
+            return
+          }
           commit(types.AUTH_REFRESH_TOKEN, res.data)
           // console.log('refresh token', state.token)
           resolve(state.token)
