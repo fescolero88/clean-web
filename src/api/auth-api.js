@@ -28,7 +28,7 @@ export default {
   },
 
   resetPasswords (identification, code, params, cb, errCb) {
-    http.get(API_BASE_URL + '/resetPassword/' + identification + '/' + code, params).then(res => cb(res), err => errCb(err))
+    http.post(API_BASE_URL + '/resetPassword/' + encodeURIComponent(identification) + '/' + encodeURIComponent(code), params.params).then(res => cb(res), err => errCb(err))
   },
 
   loginLocal (params, cb, errCb) {
