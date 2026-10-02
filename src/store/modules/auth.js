@@ -1,4 +1,5 @@
 import _ from "lodash";
+import {supportRedirect} from "./../../helpers/modules/redirect";
 import {isTokenExpired} from "./../../helpers/modules/token";
 import authAPI from "./../../api/auth-api";
 import * as types from "./../mutation-types";
@@ -98,9 +99,12 @@ const actions = {
 
         commit(types.AUTH_LOGIN_SUCCESS, result);
 
-        if(returnUrl)
-          location.href = returnUrl + '?jwt=' + response.deskproJwt;
-        else {
+        const destination = supportRedirect(returnUrl, response.deskproJwt, process.env.DESKPRO_URL);
+        if (destination) {
+          commit(types.AUTH_LOGIN_DONE)
+          resolve(result)
+          window.location.assign(destination)
+        } else {
           commit(types.AUTH_LOGIN_DONE)
 
           // // Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')

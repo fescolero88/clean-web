@@ -2,6 +2,7 @@ var merge = require('webpack-merge')
 var devEnv = require('./local.env')
 
 module.exports = merge(devEnv, {
+  DESKPRO_URL: JSON.stringify(process.env.DESKPRO_URL || ''),
   EASYVISTA_AUTH_CODE: JSON.stringify(process.env.EASYVISTA_AUTH_CODE || ''),
   NODE_ENV: '"testing"',
   URL_API: '"http://lfce85j83fdtoxhkw-mock.stoplight-proxy.io"', // stoplight.io proxy to Dev

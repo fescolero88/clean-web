@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import {returnDestination} from "./../helpers/modules/redirect";
 export default {
   name: "loginLocal",
 
@@ -77,9 +78,8 @@ export default {
   },
 
   mounted() {
-    let currentLocation = decodeURIComponent(window.location.href);
-    if(currentLocation.split('return=').length > 1) {
-      this.deskpro = currentLocation.split('return=')[1];
+    this.deskpro = returnDestination(window.location.search);
+    if (this.deskpro) {
       $('input[name="email"]').focus()
     } else
       $('input[name="password"]').focus()

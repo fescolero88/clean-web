@@ -1,4 +1,5 @@
 import Vue from "vue";
+import {supportRedirect, returnDestination} from "./../helpers/modules/redirect";
 import VueRouter from "vue-router";
 import VueResource from "vue-resource";
 import store from "./../store";
@@ -231,11 +232,13 @@ router.beforeEach((to, from, next) => {
 
 router.beforeEach((to, from, next) => {
   let authenticated = store.getters['auth/isAuthenticated'];
-  let currentLocation = decodeURIComponent(window.location.href);
-
-  if(currentLocation.split('return=').length > 1 && authenticated) {
-    let profile = store.getters['auth/getProfile'];
-    location.href = currentLocation.split('return=')[1] + '?jwt=' + profile.deskproJwt;
+  if (authenticated && !store.getters['auth/isExpired']) {
+    const profile = store.getters['auth/getProfile'];
+    const destination = supportRedirect(returnDestination(window.location.search), profile.deskproJwt, process.env.DESKPRO_URL);
+    if (destination) {
+      window.location.assign(destination);
+      return next(false);
+    }
   }
 
   let expired = store.getters['auth/isExpired'];

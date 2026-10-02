@@ -1,6 +1,7 @@
 module.exports = {
-    EASYVISTA_AUTH_CODE: JSON.stringify(process.env.EASYVISTA_AUTH_CODE || ''),
-    NODE_ENV: '"production"',
+    DESKPRO_URL: JSON.stringify(process.env.DESKPRO_URL || ''),
+  EASYVISTA_AUTH_CODE: JSON.stringify(process.env.EASYVISTA_AUTH_CODE || ''),
+  NODE_ENV: '"production"',
     URL_API: '"https://api.wirelessanalytics.com"',
     URL: '"https://app.wirelessanalytics.com"',
     CLIENT_ID: '"2"',
