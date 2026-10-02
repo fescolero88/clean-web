@@ -458,6 +458,7 @@ const actions = {
   },
 
   logout ({ commit }) {
+    commit('scope_token/' + types.SCOPE_TOKEN_CLEAR_ALL, null, {root: true})
     commit('LOGOUT')
   }
 }
