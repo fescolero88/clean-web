@@ -34,7 +34,7 @@ export default {
 
   remove (id, cb, errCb) {
     $store.dispatch('scope_token/get', 'delete_service').then(result => {
-      http.delete(API_BASE_URL + '/services/' + id, AuthHelper.getAuthHeader(result.accessToken)).then(res => cb(res), err => errCb(errCb))
+      http.delete(API_BASE_URL + '/services/' + id, AuthHelper.getAuthHeader(result.accessToken)).then(res => cb(res), err => errCb(err))
     }, err => errCb(err))
   }
 }
