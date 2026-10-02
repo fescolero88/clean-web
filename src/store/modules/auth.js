@@ -266,7 +266,7 @@ const actions = {
             }, {root: true})
           }
 
-          if (getters['error/hasError']) {
+          if (!rootGetters['error/hasError']) {
             dispatch('error/addNew', {
               message: 'Unexpected error, please, try again later.'
             }, {root: true})
