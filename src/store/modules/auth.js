@@ -53,6 +53,11 @@ const actions = {
 
   getLoginToken ({dispatch, commit, state}) {
     return new Promise((resolve, reject) => {
+      if (!state.token || !state.token.access_token ||
+          (isTokenExpired(state.token) && !state.token.refresh_token)) {
+        reject(new Error('Please sign in again'))
+        return
+      }
       if (!isTokenExpired(state.token)) {
         // console.log('saved token', state.token)
         resolve(state.token)
