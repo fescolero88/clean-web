@@ -26,7 +26,8 @@ const actions = {
     return new Promise((resolve, reject) => {
       let token = _.get(state.records, name, null)
       // console.log(name, token)
-      if (token) {
+      const expiresAt = token && token.token && Date.parse(token.token.expires_at)
+      if (token && token.accessToken && Number.isFinite(expiresAt) && expiresAt > Date.now()) {
         // Log.put('scope_token/get stored', name, token)
         resolve(token)
       } else {
