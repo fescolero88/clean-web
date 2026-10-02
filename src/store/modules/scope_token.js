@@ -8,7 +8,8 @@ const store = new Store()
 
 // initial state
 const state = {
-  records: {}
+  records: {},
+  generation: 0
 }
 
 // getters
@@ -49,12 +50,17 @@ const actions = {
     })
   },
 
-  update ({commit}, name) {
+  update ({commit, state}, name) {
+    const generation = state.generation
     return new Promise((resolve, reject) => {
       authAPI.scopeToken({
         name: name,
         scopes: [name]
       }, res => {
+        if (state.generation !== generation) {
+          reject(new Error('The session changed while requesting an API token'))
+          return
+        }
         if (res.status == 200) {
           commit(types.SCOPE_TOKEN_UPDATE, { name: name, record: res.body })
           resolve(res.body)
@@ -74,6 +80,7 @@ const actions = {
 const mutations = {
   [types.SCOPE_TOKEN_CLEAR_ALL] (state) {
     state.records = {}
+    state.generation += 1
   },
 
   [types.SCOPE_TOKEN_UPDATE] (state, {name, record}) {
