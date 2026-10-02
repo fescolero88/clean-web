@@ -542,7 +542,7 @@ const mutations = {
     state.profile = result.profile
   },
 
-  recoveryVariations (state) {
+  [types.AUTH_PASSWORD_RECOVERY] (state) {
     state.variations.allowChanges = true;
     state.variations.clickAgain = true;
     state.variations.messageShow = false;
