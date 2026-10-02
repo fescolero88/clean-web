@@ -539,7 +539,7 @@ const mutations = {
   },
 
   [types.AUTH_SET_PROFILE] (state, result) {
-    Storage.set('userProfile', JSON.stringify(result.profile))
+    Storage.set('profile', JSON.stringify(result.profile))
     state.profile = result.profile
   },
 
